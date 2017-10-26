@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<head>
+    <title>
+        display/box/float/clear test
+    </title>
+    <style type="text/css">
+        .dupa {
+            background-image: url(download.jpg);
+            width: 800px;
+            height: 500px;
+            background-size: cover;
+        }
+        .gal {
+            width: 300px;
+            height: 500px;
+            float: right;
+        }
+        input[type="text"] {
+            top: 202px;
+            position: relative;
+            font-size: 90px;
+            background: transparent;
+            border: 0;
+            width: 800px;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<button id="render">REnder</button>
+<div class="dupa">
+    <input type="text" name="fname">
+</div>
+
+<div class="gal">
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../dist/html2canvas.js"></script>
+
+
+<script type="text/javascript">
+
+  $("#render").click(function () {
+    var div = $('.dupa');
+    html2canvas(div).then(function (canvas) {
+      $(".gal").append(canvas);
+
+      var myImage = canvas.toDataURL();
+      downloadURI(myImage, "MaSimulation.png")
+
+    });
+
+    function downloadURI(uri, name) {
+      var link = document.createElement("a");
+
+      link.download = name;
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      //after creating link you should delete dynamic link
+      //clearDynamicLink(link);
+    }
+
+  });
+
+
+</script>
+</body>
+</html>
